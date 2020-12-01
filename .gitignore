@@ -30,6 +30,8 @@ Latest commit 7293c14 on 14 May
 @stuartpb@shiftkey@SimonSiefke@TennyZhuang@venatoria@ro31337@Richienb@melonmanchan@gouthamve@jucrouzet@cheddar@arcresu
 116 lines (86 sloc)  1.77 KB
 
+.idea
+*.js
 # Logs
 logs
 *.log
