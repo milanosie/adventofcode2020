@@ -4,11 +4,11 @@ const prepareInput = (rawInput: string) => rawInput
 const input = prepareInput(readInput())
 
 const goA = (input) => {
-  const numbers = input.split(/\r?\n/);
+  const numbers = input.split(/\r?\n/).filter(i => i).map(n => parseInt(n, 10)).sort((a,b) => a - b);;
   for(let item of numbers) {
     for(let item2 of numbers) {
       if(item !== item2) {
-        if(parseInt(item) + parseInt(item2) == 2020) {
+        if((item) + (item2) == 2020) {
           return item * item2;
         }
       }
@@ -17,12 +17,12 @@ const goA = (input) => {
 }
 
 const goB = (input) => {
-  const numbers = input.split(/\r?\n/);
+  const numbers = input.split(/\r?\n/).filter(i => i).map(n => parseInt(n, 10)).sort((a,b) => a - b);
   for(let item of numbers) {
     for(let item2 of numbers) {
       for(let item3 of numbers) {
         if(item !== item2 && item !== item3 && item2 !== item3) {
-          if(parseInt(item) + parseInt(item2) + parseInt(item3) == 2020) {
+          if((item) + (item2) + (item3) == 2020) {
             return item * item2 * item3;
           }
         }
