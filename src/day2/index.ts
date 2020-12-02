@@ -1,3 +1,9 @@
+/*
+
+DISCLAIMER: This code is not pretty. Please wear protective glasses
+
+ */
+
 import { test, readInput } from "../utils/index"
 
 const prepareInput = (rawInput: string) => rawInput
