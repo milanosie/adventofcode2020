@@ -54,10 +54,13 @@ const goB = (input) => {
 
 /* Results */
 
-console.time("Time")
+console.time("Time puzzle 1")
 const resultA = goA(input)
+console.timeEnd("Time puzzle 1")
+
+console.time("Time puzzle 2")
 const resultB = goB(input)
-console.timeEnd("Time")
+console.timeEnd("Time puzzle 2")
 
 console.log("Solution to part 1:", resultA)
 console.log("Solution to part 2:", resultB)
