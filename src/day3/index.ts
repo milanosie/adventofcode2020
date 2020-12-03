@@ -14,7 +14,6 @@ function doStep(rows, currentX, currentY, totalTrees, xStep, yStep): number {
     let y = currentY + yStep;
     let foundTree = false;
     if (y > rows.length - 1) {
-        console.log(totalTrees);
         return totalTrees;
     }
 
