@@ -12,7 +12,6 @@ const goA = (input) => {
 function doStep(rows, currentX, currentY, totalTrees, xStep, yStep): number {
     let x = currentX + xStep;
     let y = currentY + yStep;
-    let foundTree = false;
     if (y > rows.length - 1) {
         return totalTrees;
     }
@@ -20,8 +19,7 @@ function doStep(rows, currentX, currentY, totalTrees, xStep, yStep): number {
     if (rows[y].length <= x) {
         x = ((x) % rows[y].length);
     }
-    foundTree = rows[y].charAt(x) == '#';
-    if (foundTree) {
+    if (rows[y].charAt(x) == '#') {
         totalTrees++;
     }
     return doStep(rows, x, y, totalTrees, xStep, yStep);
