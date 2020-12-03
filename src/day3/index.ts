@@ -18,7 +18,7 @@ function doStep(rows, currentX, currentY, totalTrees, xStep, yStep): number {
         return totalTrees;
     }
 
-    if (rows[y].length >= x) {
+    if (rows[y].length > x) {
         foundTree = rows[y].charAt(x) == '#';
         if (foundTree) {
             totalTrees++;
@@ -35,7 +35,6 @@ function doStep(rows, currentX, currentY, totalTrees, xStep, yStep): number {
 
 }
 
-// goes wrong, still need to do.... after work it is
 const goB = (input) => {
     return doStep(rows, 0, 0, 0, 1, 1)
         * doStep(rows, 0, 0, 0, 3, 1)
@@ -50,10 +49,12 @@ const goB = (input) => {
 
 /* Results */
 
-console.time("Time")
+console.time("Time1")
 const resultA = goA(input)
+console.timeEnd("Time1");
+console.time("Time2");
 const resultB = goB(input)
-console.timeEnd("Time")
+console.timeEnd("Time2");
 
 console.log("Solution to part 1:", resultA)
 console.log("Solution to part 2:", resultB)
