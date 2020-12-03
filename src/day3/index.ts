@@ -17,20 +17,14 @@ function doStep(rows, currentX, currentY, totalTrees, xStep, yStep): number {
         return totalTrees;
     }
 
-    if (rows[y].length > x) {
-        foundTree = rows[y].charAt(x) == '#';
-        if (foundTree) {
-            totalTrees++;
-        }
-        return doStep(rows, x, y, totalTrees, xStep, yStep);
-    } else {
-        const calibratedX = ((x) % rows[y].length);
-        foundTree = rows[y].charAt(calibratedX) == '#';
-        if (foundTree) {
-            totalTrees++;
-        }
-        return doStep(rows, x, y, totalTrees, xStep, yStep);
+    if (rows[y].length <= x) {
+        x = ((x) % rows[y].length);
     }
+    foundTree = rows[y].charAt(x) == '#';
+    if (foundTree) {
+        totalTrees++;
+    }
+    return doStep(rows, x, y, totalTrees, xStep, yStep);
 
 }
 
