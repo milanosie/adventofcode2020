@@ -1,3 +1,7 @@
+/*
+This can be done way easier and shorter, but I don't feel like refactoring code on my saturday morning.
+ */
+
 import {test, readInput} from "../utils/index"
 
 const prepareInput = (rawInput: string) => rawInput
