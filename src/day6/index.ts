@@ -17,6 +17,7 @@ const goA = (input) => {
     formatGroups(groups);
 
     groups.forEach((group) => {
+        //Could've also used a SET to identify unique ones. But this solution works fine for this specific case.
         for(let i = 0; i < 26; i++) {
             let character = String.fromCharCode(97 + i);
             let charFound = false;
