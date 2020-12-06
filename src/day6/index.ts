@@ -28,7 +28,7 @@ const goA = (input) => {
                         totalAnswerCount++;
                     }
                 }
-            })
+            });
         }
     });
     return totalAnswerCount;
