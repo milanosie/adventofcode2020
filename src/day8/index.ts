@@ -1,10 +1,11 @@
-import { test, readInput } from "../utils/index"
+import {readInput} from "../utils/index"
 
 const prepareInput = (rawInput: string) => rawInput
 
 const fileInput = prepareInput(readInput()).split('\n').filter(n => n);
 let visited: number[] = [];
 let finalValue: number;
+
 function goA(input) {
   input = parseInput(input);
   return readNextInstruction(input, 0, 0);
@@ -50,8 +51,7 @@ function readNextInstruction(input, accValue, currentIndex) {
     case 'nop':
       return readNextInstruction(input, accValue, currentIndex + 1);
     case 'acc':
-      accValue += instruction[1];
-      return readNextInstruction(input, accValue, currentIndex + 1);
+      return readNextInstruction(input, accValue += instruction[1], currentIndex + 1);
     case 'jmp':
       return readNextInstruction(input, accValue, currentIndex + instruction[1]);
     default:
@@ -59,10 +59,6 @@ function readNextInstruction(input, accValue, currentIndex) {
   }
 
 }
-
-/* Tests */
-
-// test()
 
 /* Results */
 
