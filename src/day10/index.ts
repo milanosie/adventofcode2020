@@ -1,4 +1,4 @@
-import {test, readInput} from "../utils/index"
+import {readInput} from "../utils/index"
 
 const prepareInput = (rawInput: string) => rawInput
 
@@ -25,28 +25,28 @@ const goA = (input) => {
 const getDifference = (a, b): number => {
     return b - a;
 }
-const checkIfCanBeRemoved = (input, i: any, number: number, totalRemovedNumbers): number => {
-    if (input[i + number] != undefined) {
-        if (getDifference(input[i], input[i + number]) > 3) {
-            console.log(totalRemovedNumbers);
-            //No more numbers can be removed DIRECTLY, but maybe later in the line?
-            return totalRemovedNumbers;
-        } else {
-            return checkIfCanBeRemoved(input, i, number + 1, totalRemovedNumbers + 1);
-        }
-    } else {
-        return totalRemovedNumbers;
-    }
-
-}
 
 const goB = (input) => {
-    const adapterRating = Math.max(...input) + 3;
-    let totalPossibilities = 0;
-    for (let i = 0; i < input.length; i++) {
-        totalPossibilities += checkIfCanBeRemoved(input, i, 1, 0);
-    }
-    return totalPossibilities * totalPossibilities * 8;
+    const result: number[] = [];
+    input.sort((a, b) => b - a);
+    input.forEach((value: number, i: number) => {
+        let subResult;
+        if(i == 0) {
+            subResult = 1
+        }
+        else {
+            subResult = 0;
+        }
+
+        for(let j = 3; j >= 1; j--) {
+            if(i >= j && getDifference(value, input[i - j]) < 4) {
+                subResult += result[i - j];
+            }
+        }
+        result.push(subResult);
+    });
+
+    return result[result.length - 1] * 2;
 }
 
 /* Tests */
