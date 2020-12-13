@@ -42,7 +42,7 @@ const goA = (input) => {
     }
     input.forEach((instruction) => {
         const direction = instruction.substr(0, 1);
-        const steps = Number(instruction.substr(1, instruction.length - 1));
+        const steps = Number(instruction.substr(1, instruction.length));
         switch (direction) {
             case 'L':
             case 'R':
@@ -63,10 +63,12 @@ const goA = (input) => {
             case 'F':
                 position = getNewPosition(facing, steps, position.currentX, position.currentY);
                 break;
+            default:
+                console.error('unhandled');
         }
     });
     // runSomeTests();
-    return getManhattenDistance(position.currentX, position.currentY);
+    return getManhattanDistance(position.currentX, position.currentY);
 }
 
 const getFacingDirection = (currentDirection: DIRECTION, instruction: string, number: number): DIRECTION => {
@@ -83,15 +85,20 @@ const goB = (input) => {
 }
 
 const runSomeTests = () => {
-    console.log(getFacingDirection(DIRECTION.East, 'L', 180));
-    console.log(getFacingDirection(DIRECTION.East, 'L', 90));
-    console.log(getFacingDirection(DIRECTION.East, 'R', 90));
-    console.log(getFacingDirection(DIRECTION.North, 'R', 1080));
-    console.log(getFacingDirection(DIRECTION.North, 'L', 270));
-    console.log(getFacingDirection(DIRECTION.East, 'R', 270));
+    console.log(getFacingDirection(DIRECTION.East, 'L', 180) == DIRECTION.West);
+    console.log(getFacingDirection(DIRECTION.East, 'L', 90) == DIRECTION.North);
+    console.log(getFacingDirection(DIRECTION.East, 'R', 90) == DIRECTION.South);
+    console.log(getFacingDirection(DIRECTION.North, 'R', 270) == DIRECTION.West);
+    console.log(getFacingDirection(DIRECTION.North, 'L', 270) == DIRECTION.East);
+    console.log(getFacingDirection(DIRECTION.East, 'R', 270) == DIRECTION.North);
+
+    console.log(getNewPosition(DIRECTION.East, 10, 0, 0));
+    console.log(getNewPosition(DIRECTION.West, 10, 0, 0));
+    console.log(getNewPosition(DIRECTION.South, 10, 0, 0));
+    console.log(getNewPosition(DIRECTION.North, 10, 0, 0));
 }
 
-const getManhattenDistance = (x, y) => {
+const getManhattanDistance = (x, y) => {
     return Math.abs(x) + Math.abs(y);
 }
 
