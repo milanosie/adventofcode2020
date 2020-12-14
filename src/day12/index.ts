@@ -42,7 +42,7 @@ const goA = (input) => {
     }
     input.forEach((instruction) => {
         const direction = instruction.substr(0, 1);
-        const steps = Number(instruction.substr(1, instruction.length));
+        const steps = Number(instruction.substr(1));
         switch (direction) {
             case 'L':
             case 'R':
@@ -80,8 +80,72 @@ const getFacingDirection = (currentDirection: DIRECTION, instruction: string, nu
     }
 }
 
+const rotateWaypoint = (currentX: number, currentY: number, instruction: string, number: number):
+    { currentX: number, currentY: number } => {
+    switch (instruction) {
+        case "R":
+            switch (number) {
+                case 90:
+                    [currentX, currentY] = [currentY, -currentX];
+                    break;
+                case 180:
+                    [currentX, currentY] = [-currentX, -currentY];
+                    break;
+                case 270:
+                    [currentX, currentY] = [-currentY, currentX];
+                    break;
+            }
+            break;
+        case "L":
+            switch (number) {
+                case 90:
+                    [currentX, currentY] = [-currentY, currentX];
+                    break;
+                case 180:
+                    [currentX, currentY] = [-currentX, -currentY];
+                    break;
+                case 270:
+                    [currentX, currentY] = [currentY, -currentX];
+                    break;
+            }
+            break;
+    }
+    return {currentX: currentX, currentY: currentY};
+}
+
 const goB = (input) => {
-    return
+    let position = {currentX: 0, currentY: 0};
+    let wayPointRelativePosition = {currentX: 10, currentY: 1};
+
+    input.forEach((instruction) => {
+            const direction = instruction.substr(0, 1);
+            const steps = Number(instruction.substr(1));
+            switch (direction) {
+                case 'L':
+                case 'R':
+                    wayPointRelativePosition = rotateWaypoint(wayPointRelativePosition.currentX, wayPointRelativePosition.currentY, direction, steps);
+                    break;
+                case 'N':
+                    wayPointRelativePosition = getNewPosition(DIRECTION.North, steps, wayPointRelativePosition.currentX, wayPointRelativePosition.currentY);
+                    break;
+                case 'S':
+                    wayPointRelativePosition = getNewPosition(DIRECTION.South, steps, wayPointRelativePosition.currentX, wayPointRelativePosition.currentY);
+                    break;
+                case 'W':
+                    wayPointRelativePosition = getNewPosition(DIRECTION.West, steps, wayPointRelativePosition.currentX, wayPointRelativePosition.currentY);
+                    break;
+                case 'E':
+                    wayPointRelativePosition = getNewPosition(DIRECTION.East, steps, wayPointRelativePosition.currentX, wayPointRelativePosition.currentY);
+                    break;
+                case 'F':
+                    let currentX = position.currentX + wayPointRelativePosition.currentX * steps;
+                    let currentY = position.currentY + wayPointRelativePosition.currentY * steps;
+                    position = { currentX: currentX, currentY: currentY };
+                    break;
+            }
+        }
+    );
+    return getManhattanDistance(position.currentX, position.currentY);
 }
 
 const runSomeTests = () => {
