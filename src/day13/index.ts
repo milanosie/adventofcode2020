@@ -17,12 +17,11 @@ const goA = (input) => {
       }
     });
   }
-  console.log(busFound * (timeStamp - timeOfArrival));
-  return
+  return busFound * (timeStamp - timeOfArrival)
 }
 
 const goB = (input) => {
-  return
+  return;
 }
 
 /* Tests */
